@@ -6,7 +6,9 @@
 	* Design Patterns
 		* [Factory](development/creational-patterns/factory.md)
 		* [Builder](development/creational-patterns/builder.md)
-		* [Inversion of Control](development/dependency-patterns/inversion-of-control.md)
-		* [Service Location](development/dependency-patterns/service-location.md)
-		* [Dependency Injection](development/dependency-patterns/dependency-injection.md)
+		* [Inversion of control](development/dependency-patterns/inversion-of-control.md)
+		* [Service location](development/dependency-patterns/service-location.md)
+		* [Dependency injection](development/dependency-patterns/dependency-injection.md)
 		* [Repository](development/data-patterns/repository.md)
+	* Testing
+	    * [Intro to testing](development/testing/intro-to-testing.md)
