@@ -12,17 +12,13 @@ So as mentioned in the **IoC** section the problem is classes instantiating thei
 ```csharp
 public class ManuallyInstantiatingDependencies
 {
-  private ISomeDependency _someDependency;
-  
-  public NotUsingIoC()
-  {
-   _someDependency = new SomeDependency();
-  }
-  
-  public void DoSomething() 
-  {
-   _someDependency.MakeTheMagic(); 
-  }
+    private ISomeDependency _someDependency;
+    
+    public NotUsingIoC()
+    { _someDependency = new SomeDependency(); }
+    
+    public void DoSomething() 
+    { _someDependency.MakeTheMagic(); }
 }
 ```
 
@@ -33,17 +29,13 @@ using SomeDependencyContainer = SomeDependencyManager.Container;
  
 public class UsingServiceLocation
 {
-  private ISomeDependency _someDependency;
- 
-  public UsingServiceLocation()
-  {
-   _someDependency = SomeDependencyContainer.Resolve<ISomeDependency>();
-  }
-  
-  public void DoSomething() 
-  {
-   _someDependency.MakeTheMagic(); 
-  }
+    private ISomeDependency _someDependency;
+    
+    public UsingServiceLocation()
+    { _someDependency = SomeDependencyContainer.Resolve<ISomeDependency>(); }
+    
+    public void DoSomething() 
+    { _someDependency.MakeTheMagic(); }
 }
 ``` 
 
@@ -70,9 +62,7 @@ using SomeDependencyContainer = SomeDependencyManager.Container;
 public abstract class SensibleMonoBehavior : MonoBehavior
 {
 	protected T Resolve<T>()
-	{
-		return SomeDependencyContainer.Resolve<T>();
-	}
+	{ return SomeDependencyContainer.Resolve<T>(); }
 }
 
 public class PlayerBehaviour : SensibleMonoBehavior // Notice how we now use our proxy class

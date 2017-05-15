@@ -8,17 +8,13 @@ Now rather than waffle on lets have a look at a class which is using **IoC**:
 ```csharp
 public class UsingIoC
 {
-  private ISomeDependency _someDependency;
-  
-  public NotUsingIoC(ISomeDependency someDependency)
-  {
-  	_someDependency = someDependency;
-  }
-  
-  public void DoSomething() 
-  {
-  	_someDependency.MakeTheMagic(); 
-  }
+    private ISomeDependency _someDependency;
+    
+    public NotUsingIoC(ISomeDependency someDependency)
+    { _someDependency = someDependency; }
+    
+    public void DoSomething() 
+    { _someDependency.MakeTheMagic(); }
 }
 ``` 
 
@@ -27,17 +23,13 @@ So this is possibly the simplest example of **IoC** and focuses really on what i
 ```csharp
 public class NotUsingIoC
 {
-  private ISomeDependency _someDependency;
-  
-  public NotUsingIoC()
-  {
-   _someDependency = new SomeDependency();
-  }
-  
-  public void DoSomething() 
-  {
-   _someDependency.MakeTheMagic(); 
-  }
+    private ISomeDependency _someDependency;
+    
+    public NotUsingIoC()
+    { _someDependency = new SomeDependency(); }
+    
+    public void DoSomething() 
+    { _someDependency.MakeTheMagic(); }
 }
 ```
 > There is also another way to solve the above problem known as **Service Location**, which we will get to shortly.

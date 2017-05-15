@@ -4,7 +4,7 @@
 
 Simply speaking its a way of resolving class dependencies using large container of type resolvers. There are plenty of **DI** frameworks for almost every modern programming language. As we are focusing on **C#** there are plenty of frameworks like **Ninject**, **AutoFac**, **Unity** (Microsoft) and many more. However in the context of Unity there are not that many which are supported, so the main options are **Zenject** and **StrangeIoC**, although for this example we will use **Zenject** here purely because it is slightly more lightweight, as **Strange IoC** has a bit of conventions that come with it.
 
-> You can find all the documentation and information about **Zenject** on their website, http://strangeioc.github.io/strangeioc  and you can find further information about **Zenject** on their website, https://github.com/modesttree/Zenject
+> You can find all the documentation and information on their websites for both [**Zenject**](https://github.com/modesttree/Zenject) as [**StrangeIoC**](http://strangeioc.github.io/strangeioc).
 
 At a high level almost all dependency injection frameworks share the same principals, so although we are using a specific framework here you can easily apply the same principals even if the syntax is different. So lets begin with a simple binding container file, this is where you often put all your setup bindings.
 
