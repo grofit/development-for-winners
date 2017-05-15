@@ -1,0 +1,3 @@
+# Planning
+
+This section will cover the process from having an idea to making sure you understand the work needed to convert those amazing ideas into tangible tasks you (or others) can work on. There will be discussion on tools and approaches that can speed up your planning stage and for the most part we will be looking at things in an agile-like format which is widely popular and documented online.
