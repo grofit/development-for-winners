@@ -2,6 +2,9 @@
 
 * [Planning](planning/readme.md)
     * [Having the idea](planning/having-the-idea.md)
+    * Managing the project
+        * [Agile Overview](planning/agile/whimsical-agile.md)
+        * [Agile Buzzwords](planning/agile/agile-buzzwords.md)
 * [Development](development/readme.md)
 	* Design Patterns
 		* [Factory](development/creational-patterns/factory.md)

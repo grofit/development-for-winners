@@ -3,7 +3,9 @@
 ## A bit about what we will cover
 So before we begin, I just want to discuss the sort of content in this book as well as the reason why we are discussing these topics and why its not just a raw technical book focused on programming but a rounded book covering all aspects of development. 
 
-I apologise if you already know some of what is covered or you dislike my way of writing, I tend to make sweeping generalisations and not all developers fail at some of the things I accuse them of, but at the heart of my occasional insulting and tardiness there is some wisdom to be absorbed by the willing readers.
+I apologise if you already know some of what is covered or you dislike my way of writing, I tend to make sweeping generalisations and not all developers fail at some of the things I accuse them of, but at the heart of my occasional insulting and tardiness there is some wisdom to be absorbed by the willing reader.
+
+In almost all cases developers often are doing the best they can with the tools and knowledge they have, but without someone showing them a better way, how are they meant to improve? So this is an attempt at trying to get to the heart of some important process and technical subjects that if you don't know about them, should hopefully get you up to speed quickly.
 
 Now the general focus of the book can be split into 3 parts:
 

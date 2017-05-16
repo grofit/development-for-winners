@@ -1,8 +1,8 @@
-### Repository
+# Repository
 
 This is more of a high level pattern which abstracts away data access and query concerns for data. So for example if you had a data store of items in your game and you wanteda way to be able to pull out a weapon with a specific name, or save a new item to the data store etc, a repository would allow you to do that in a more streamlined way.
 
-#### Opinionated rant
+## Opinionated rant
 
 It is included here as a lot of people get it wrong. You can go google it now and almost every link to the repository pattern will show you something where they advocate you having an `IRepository<T>` then making your own implementation per type, such as `UserRepository : IRepository<User>` which would contain the standard `CRUD` based operations of a repository but with `User` specific methods like `GetAllActiveUsers`.
 
@@ -10,7 +10,7 @@ It is included here as a lot of people get it wrong. You can go google it now an
 
 I dislike this approach and I have a better approach which is more isolated, more reuseable and also more flexible. As some of the problems with the former approach is that you tend to keep dumping all your logic into your repositories, so your `UserRepository` goes from having the basic CRUD methods to having lots of business logic which will keep snowballing every time you want to add more query types.
 
-#### Making the repository
+## Making the repository
 
 Let's start off with making a repository interface which almost all examples will agree upon.
 
@@ -26,9 +26,11 @@ public interface IRepository<TItem, TKey>
 
 So before we go any further lets just go over the basics. The interface has 2 generic types, the first being the data object that is to be retrieved and stored, like your `Item`, `Player`, `Quest` etc, the second being the type of the key/identifier for this resource. 
 
+> The key is sometimes omitted if you are not working purely with relational databases, so within here we will simplify and remove the key type generic as in the game world you may be working more with in memory of flat file style databases.
+
 So now we have shown the *vanilla* repository we will start to differentiate from the majority of other patterns and we add the notion of an Execute method and replace Get with Find method. We will also remove the key type as Find allows us more flexibility here.
 
->There is also the notion of a `HybridQuery` but I will leave that out and explain it later on so you can decide if you want to add it or not.
+> There is also the notion of a `HybridQuery` but I will leave that out and explain it later on so you can decide if you want to add it or not.
 
 ```csharp
 public interface IRepository<TItem>
@@ -45,7 +47,7 @@ public interface IRepository<TItem>
 
 So as you can see here we now have a way to get a collection of `TItem` instances from the data source, as well as provide a way to execute some logic against the data source.
 
-#### Modelling the queries
+## Modelling the queries
 
 The interfaces for the queries would look like:
 
@@ -63,7 +65,7 @@ public interface IExecuteQuery<T>
 
 This may seem a little confusing as we have not discussed the `IDataSource`, this is an abstracted notion of how you access the data. If you are using databases you could easily replace this with `IDBConnection` which would abstract away the database. Given in most cases game data is read into memory you would probably just have this as a wrapper around the list of data in memory, however you could make it abstract the file system if you wished it to do manual file reads/writes.
 
-#### Abstracting the data store/source
+## Abstracting the data store/source
 
 In this example we will assume you have your game data in some files, be it XML/JSON/Binary and you read it into a big list which will be in memory for the duration of the game, so the `IDataSource` will wrap this.
 
@@ -105,7 +107,7 @@ public class InMemoryDataSource<T> : IDataSource<T>
 
 > If you wanted to here you could expose methods for querying the data to make it more like a database, but we will try to keep it all simple for now so you are able to just see the high level picture, then customize the underlying classes and interfaces to suit your scenario.
 
-#### Implementing the repository
+## Implementing the repository
 
 So currently we have got our `IRepository`, the query classes, the `IDataSource` interfaces and implementations, so now lets look at making a repository instance and then using it with some queries.
 
@@ -164,7 +166,7 @@ var getActiveUsersQuery = new GetActiveUsersQuery();
 var activeUsers = userRepository.Find(getActiveUsersQuery);
 ```
 
-#### Implementing find queries
+## Implementing find queries
 
 Now the above example is just whimsical but if you imagine there is a user model, and we need to get all active users, we can express that specific query within the `GetActiveUsersQuery` which is a type of `IFindQuery`. Let's do an imaginary implementation of this query to show how it would work:
 
@@ -203,7 +205,7 @@ public class PredicateFindQuery<T> : IFindQuery<T>
 
 This allows you to just write any old predicate you want to query into the data source. I would probably still advocate making typed queries to represent your logic so it shows intent. However if you just want to get on and do some testing of queries or just don't want to have to keep instantiating query objects just make it a public property and off you go.
 
-#### Implementing execute queries
+## Implementing execute queries
 
 Now we have not discussed the `ExecuteQuery` type yet. So where the `FindQuery` is there to get a readonly collection of matching results, `ExecuteQuery` is there to alter data in some way, so this provides the write concern to the find's read concern. so lets go over that with a quick example.
 
@@ -224,7 +226,7 @@ public class BanAllCheatersQuery : IExecuteQuery<User>
 
 So it would retrieve all active cheats, then disable them. This approach can be done for updating sets of data without having to do it for each individual set.
 
-#### More information
+## More information
 
 This has been a large block on the pattern and although the above use case would work fine for most game development scenarios in the web/app world you would probably end up dealing with databases more be it relational or document/graph etc, so in those cases you may need to change around how you abstract away certain parts.
 

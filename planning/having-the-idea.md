@@ -1,13 +1,11 @@
 # Having the idea
-So you have come up with a great indie game idea or application that will make you millions, and you have done more than the 99% and have decided to go from the **thinking** phase to the **doing** phase, now rather than rushing in to some implementation based on some torrent of ideas from your mind, lets have a look at some of the areas that make up the indie game and how you can be best equipped to start an indie game project.
+So you have come up with a great indie game idea or application that will make you millions, and you have done more than the 99% and have decided to go from the **thinking** phase to the **doing** phase.
 
-## Managing the Design, Scope and Progress
-It is great having a head full of ideas, but without quantifying them and how they all fit together it will be VERY tough for you to make real progress, and this is even more important if you are working with a team of people.
+Now rather than rushing in to some implementation based on some torrent of ideas from your mind, you need to take a step back and think about the high level aspects of what you are wanting to do and how you are going to achieve them.
 
-Generally a good idea for managing the project is to have some sort of central ideas hub, and its important to not just have ideas but information around those ideas, like how long you think it will take, who is working on it, what dependencies that has on other tasks etc. There are plenty of free Agile tools which help solve this problem, such as **Trello**, **Youtrack**, **Jira** as well as many more.
+## What it is?
+So before you go anywhere, write a brief synopsis/pitch of what your game/application is, try to describe the main mechanics, such as if your game is a platformer what makes it stand out, if it is an RPG detail the high level story arc or something so you can give this to anyone else and they will be able to understand where you are coming from with your ideas, be it team members or publishers.
 
-> We will focus on the tool with the least effort required to setup, share and work with, which in this case will be Trello. It is free to host your own projects on there and is very configurable and easy to use. We will see later on why other tools would be better suited to larger development projects.
+> A lot of people will start an idea as a single person, and thats fine, but realistically these days it is very difficult to make an entire game as one man so it is likely that at some point you will need to bring in others to help you. Without some high level blurb about what you are trying to achieve it may be a struggle getting the new guy into the same idea space as yourself. So think about this when you are writing your summary.
 
-So imagine that you have started on your prototype and you have done some animation bits you have some basic AI and you are needing someone to come in and implement some sort of inventory system. How do you tell this person what you want? do you just give them a verbal description? write it all down in a word document for them? just tell them high level ideas and hope they get it right?
-
-If you use a project board like the ones above it is very easy to just create a some small encapsulated tasks which explain to anyone on your project what you expect from it, and is also helps everyone know how far along a project is and if someone comes up with an idea everyone else can comment on it in one place and track it's progress.
+This sort of approach also helps anchor you when your ideas will start running wild. It doesn't need to be long, just a few paragraphs that encapsulates your game and if you want more information there is a great article here on writing game pitches [http://www.gamedonia.com/blog/game-pitch-how-to](http://www.gamedonia.com/blog/game-pitch-how-to).
