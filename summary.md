@@ -5,6 +5,9 @@
     * Managing the project
         * [Agile Overview](planning/agile/whimsical-agile.md)
         * [Agile Buzzwords](planning/agile/agile-buzzwords.md)
+    * Collaboration and Requirements
+        * [Ideas & Tasks](planning/requirements/ideas-and-tasks.md) 
+        * [Quantifying Requirements](planning/requirements/writing-requirements.md) 
 * [Development](development/readme.md)
 	* Design Patterns
 		* [Factory](development/creational-patterns/factory.md)

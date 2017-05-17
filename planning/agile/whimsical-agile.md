@@ -8,6 +8,8 @@ One thing that sets Agile apart from others is that its not really that complica
 
 At a high level agile wants more communication, team decisions, good requirements, frequent deliveries and tests of software, and reflection on how to improve things. This all should hopefully sound like common sense and we will touch on more of that as we continue.
 
+> If you are a single developer or in a team <= 3 people then a lot of this stuff will be overkill for you, but some of the good practices in an agile environment (covered later) will hopefully still be applicable to you one-man-armies and smaller teams.
+
 ## Steps
 
 So there is a whole agile manifesto and LOTS of information online about each stage and reams of text going into detail about how long you should take on each and who should be involved etc, but at a high level here are the steps.
@@ -31,3 +33,11 @@ Once you know this you can get everyone together and work out what the goal of t
 ### Construction/Development
 
 The construction phase is where there will be standups every day and everyone is hammering out code to get the the stories complete. This is one of the simplest stages to explain and although there will be a lot of development, there will also be some other things happening in an ideal world like automated builds and deployments as well as testers verifying what has been created against acceptance criteria.
+
+### Deployment/Restrospective
+
+This stage is known as many things depending on the flavour of agile but if you ignore the words and look into what actually happens at this stage (or multiple smaller stages) its all the same thing. You deploy what you have worked on to whatever environments required, and have a retrospective on how the sprint went.
+
+> This is where things like automated builds and technical debt tracking can pay off, as it will speed up your deployments and make it easier to bubble to other environments (more on this later). 
+
+Retrospectives can be as formal or informal as you want, it is recommended that you get some points to try and improve upon next sprint but its really about people just raising any concerns about the way things are going and rectifying them sooner rather than later. So for example you may find that your requirements are lacking in a sprint, so you can raise for them to be improved in a future sprint, or that you have lots of technical debt and its causing issues, so in the next sprint you could choose to play 50% less backlog stories and try to tackle some technical debt etc.
