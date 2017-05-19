@@ -1,4 +1,4 @@
-## Build Scripts & Processes
+# Build Scripts & Processes
 
 Build scripts are a great way to manage your project and environment, it can automate a huge amount of steps you would normally need to carry out when setting up your project and building/testing it.
 
@@ -50,9 +50,9 @@ So to get setup:
 - Run the command `npm install -g gulp`
 - Run the command `npm install`
 
-T> This tells npm that you depend upon `gulp`, you can use `dependencies` opposed to `devDependencies`, the distinction only matters if you were to release this library to others to use. As we are not and it is a private project and wont be published anywhere we can just rely upon the development dependencies.
+> This tells npm that you depend upon `gulp`, you can use `dependencies` opposed to `devDependencies`, the distinction only matters if you were to release this library to others to use. As we are not and it is a private project and wont be published anywhere we can just rely upon the development dependencies.
 
-I> The `npm install -g gulp` may seem redundant as we have gulp setup as a dependency however npm has the notion of global libraries and local ones, so if you want to use the gulp task runner on the command line (which we will) you will need to register it globally so the `bin` folder of gulp is associated with your path.
+> The `npm install -g gulp` may seem redundant as we have gulp setup as a dependency however npm has the notion of global libraries and local ones, so if you want to use the gulp task runner on the command line (which we will) you will need to register it globally so the `bin` folder of gulp is associated with your path.
 
 After following the above steps you should now have a `node_modules` folder which you can ignore from source control if you wish, and that should have a gulp folder in. This is the minimum required to get gulp running, you can test it if you want by creating a `gulpfile.js` and adding the following to it:
 

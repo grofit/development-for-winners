@@ -18,3 +18,9 @@
 		* [Repository](development/data-patterns/repository.md)
 	* Testing
 	    * [Intro to testing](development/testing/intro-to-testing.md)
+    * Source Control
+        * [Source Control Basics](development/source-control/basic-source-control.md)
+        * [Git Patterns](development/source-control/source-control-patterns.md)
+* [Building & Deployment](building/readme.md)
+    * Build scripts & servers
+        * [Build Scripts](building/build-scripts.md) 
