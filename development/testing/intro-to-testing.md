@@ -87,7 +87,7 @@ Now we could write the same sort of test for it:
 [Test]
 public void should_divide_numbers_together()
 {
-	var expectedResult = 2;
+	var expectedResult = 5;
 	var a = 10;
 	var b = 2;
 
