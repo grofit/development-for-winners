@@ -72,7 +72,7 @@ In this example we will assume you have your game data in some files, be it XML/
 It would look something like:
 
 ```csharp
-public interface IDataStore<T>
+public interface IDataSource<T>
 {
     IList<T> DataItems {get;}
     
