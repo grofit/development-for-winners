@@ -16,6 +16,10 @@
 		* [Service location](development/dependency-patterns/service-location.md)
 		* [Dependency injection](development/dependency-patterns/dependency-injection.md)
 		* [Repository](development/data-patterns/repository.md)
+        * [Reactive Extensions](development/data-patterns/reactive-extensions.md)
+    * Game/Web Patterns
+        * [ECS](development/logic-patterns/ecs.md)
+        * [MVVM](development/logic-patterns/mvvm.md)
 	* Testing
 	    * [Intro to testing](development/testing/intro-to-testing.md)
     * Source Control
