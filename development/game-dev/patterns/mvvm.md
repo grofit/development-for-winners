@@ -1,6 +1,6 @@
 ## Model View ViewModel (MVVM)
 
-This pattern originated as a way to manage complex UI interactions such as web apps, but has increasingly found its way into other use cases, such as game development where you have complex views that need to be data driven.
+This pattern originated as a way to manage complex UI interactions such as web apps, but has increasingly found its way into other use cases, such as game development where you have complex views that need to be data driven, because of that it can be seen as a useful pattern regardless of if you are doing game dev, web dev or application development.
 
 One thing to note here is that it can be beneficial to look at MVVM in the web world as a lot of the skills and notions cross over as the high level pattern is generally the same.
 

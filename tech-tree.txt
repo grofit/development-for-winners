@@ -1,0 +1,41 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    [Aspect Oriented Programming]
+
+                    [Dependency Injection]
+
+[MVVM]               [Composition]                      [Test Mocking]           [Continous Integration]
+
+  [Rx]                [Inversion Of Control]             [Unit Testing]                 [Build Scripts]
+
+                    [Programming]                       [Testing]                   [Build]

@@ -9,22 +9,26 @@
         * [Ideas & Tasks](planning/requirements/ideas-and-tasks.md) 
         * [Quantifying Requirements](planning/requirements/writing-requirements.md) 
 * [Development](development/readme.md)
-	* Design Patterns
-		* [Factory](development/creational-patterns/factory.md)
-		* [Builder](development/creational-patterns/builder.md)
-		* [Inversion of control](development/dependency-patterns/inversion-of-control.md)
-		* [Service location](development/dependency-patterns/service-location.md)
-		* [Dependency injection](development/dependency-patterns/dependency-injection.md)
-		* [Repository](development/data-patterns/repository.md)
-        * [Reactive Extensions](development/data-patterns/reactive-extensions.md)
-    * Game/Web Patterns
-        * [ECS](development/logic-patterns/ecs.md)
-        * [MVVM](development/logic-patterns/mvvm.md)
-	* Testing
-	    * [Intro to testing](development/testing/intro-to-testing.md)
-    * Source Control
-        * [Source Control Basics](development/source-control/basic-source-control.md)
-        * [Git Patterns](development/source-control/source-control-patterns.md)
+    * [Good Stuff](development/general/readme.md)
+        * Design Patterns
+            * [Factory](development/general/creational-patterns/factory.md)
+            * [Builder](development/general/creational-patterns/builder.md)
+            * [Inversion of control](development/general/dependency-patterns/inversion-of-control.md)
+            * [Service location](development/general/dependency-patterns/service-location.md)
+            * [Dependency injection](development/general/dependency-patterns/dependency-injection.md)
+            * [Repository](development/general/data-patterns/repository.md)
+            * [Reactive Extensions](development/general/data-patterns/reactive-extensions.md)
+        * Testing
+            * [Intro to testing](development/testing/intro-to-testing.md)
+        * Source Control
+            * [Source Control Basics](development/source-control/basic-source-control.md)
+            * [Git Patterns](development/source-control/source-control-patterns.md)
+        * [Anti Patterns](development/general/anti-patterns/anti-patterns.md)
+    * Web Specific Stuff
+    * Game Dev Specific Stuff
+        * Game Management Patterns
+            * [ECS](development/game-dev/patterns/ecs.md)
+            * [MVVM](development/game-dev/patterns/mvvm.md)
 * [Building & Deployment](building/readme.md)
     * Build scripts & servers
         * [Build Scripts](building/build-scripts.md) 

@@ -19,18 +19,18 @@ Now before you instantly *sigh* and want it to be fully technically focused, the
 
 ## The technologies
 
-The general focus of this book will be around game development using:
+The book will try to separate out the technologies based upon use cases:
 
-- C#
-- Unity
+- General (This is good stuff that you can apply to all disciplines of development, i.e generic C# code)
+- Web (This is more tech that is applicable specifically to the web world, i.e ASP MVC, NodeJs, C#, Javascript)
+- Game Dev (You guessed it, stuff related to game development, i.e Unity)
 
-However we will be learning transferable skills, for example learning **Dependency Injection** within the context of Unity should also be enough for you to know how to use **DI** outside of Unity. One of the great things about patterns and practices are that they are often able to be applied anywhere, so once you understand the paradigm not just the syntax behind something you should be fine applying what you have learnt in other development scenarios, be it web, app or mobile development.
+Most of what we will be learning are transferable skills, for example learning **Dependency Injection** within the context of Unity should also be enough for you to know how to use **DI** outside of Unity. One of the great things about patterns and practices are that they are often able to be applied anywhere, so once you understand the paradigm not just the syntax behind something you should be fine applying what you have learnt in other development scenarios, be it web, app or mobile development.
 
 > A surprising amount of skills can transfer from web/app development to game development, such as view separation paradigms, dependency management, unit testing and many other patterns and practices. I know a lot of game developers look down on web developers as some inferior species of developer but there is a lot to be learnt from both sides.
 
-
 ## Expected reader skill level
 
-This is not a book for a complete new comer to programming, it is expected that you at least have a working knowledge of C# and hopefully Unity. You may be an expert on both but have never touched design patterns before, or you may be a new comer but know a few basic patterns, either way as long as you feel confident to be pragmatic and look at some new approaches *(even if you don't fully agree)* then it should be a good read.
+This is not a book for a complete new comer to programming, it is expected that you at least have a working knowledge of C# and hopefully Unity. You may be an expert on both but have never touched design patterns before, or you may be starting out but know a few basic patterns, either way as long as you feel confident to be pragmatic and look at some new approaches *(even if you don't fully agree)* then it should be a good read.
 
 If you are still fairly new to development then don't panic, just make sure you are at least familiar with classes, methods, generics and inheritance. If you do not know any of those previous terms then it is recommended you go read up on it first, then come back once you know more.
