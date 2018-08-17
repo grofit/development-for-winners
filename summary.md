@@ -26,6 +26,9 @@
             * [Git Patterns](development/source-control/source-control-patterns.md)
         * [Anti Patterns](development/general/anti-patterns/anti-patterns.md)
     * [Web Specific Stuff](development/web/readme.md)
+        * Front End
+            * [Quick word on JS](development/web/front-end/quick-word-on-js.md)
+            * [Things to know about JS](development/web/front-end/things-to-know-about-js.md)
     * Game Dev Specific Stuff
         * Game Related Patterns
             * [ECS](development/game-dev/patterns/ecs.md)
