@@ -28,14 +28,14 @@
 
 
 
-
+                                                        [Acceptance Testing]         [Containerising]                   [Acceptance Criteria]
 
                     [Aspect Oriented Programming]
-
+                                                        [Integration Testing]       [Environmental Setup]
                     [Dependency Injection]
 
-[MVVM]               [Composition]                      [Test Mocking]           [Continous Integration]
+[MVVM]  [ECS]             [Composition]                 [Test Mocking]      [Branching Strats]  [Continous Integration]
 
-  [Rx]                [Inversion Of Control]             [Unit Testing]                 [Build Scripts]
+  [Rx]                [Inversion Of Control]             [Unit Testing]                 [Build Scripts]        
 
-                    [Programming]                       [Testing]                   [Build]
+                    [Programming]                       [Testing]                        [Build]                           [Requirements]
