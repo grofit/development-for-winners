@@ -16,6 +16,7 @@
             * [Inversion of control](development/general/dependency-patterns/inversion-of-control.md)
             * [Service location](development/general/dependency-patterns/service-location.md)
             * [Dependency injection](development/general/dependency-patterns/dependency-injection.md)
+            * [Strategy-like Patterns](development/general/data-patterns/strategy-like-patterns.md)
             * [Repository](development/general/data-patterns/repository.md)
             * [Reactive Extensions](development/general/data-patterns/reactive-extensions.md)
         * Testing
@@ -30,6 +31,8 @@
             * [Quick word on JS](development/web/front-end/quick-word-on-js.md)
             * [Things to know about JS](development/web/front-end/things-to-know-about-js.md)
     * Game Dev Specific Stuff
+        * Recap on Patterns
+            * [Depedency Injection In Gaming](development/game-dev/recaps-with-gaming-bias/dependency-injection.md)
         * Game Related Patterns
             * [ECS](development/game-dev/patterns/ecs.md)
             * [MVVM](development/game-dev/patterns/mvvm.md)
