@@ -20,8 +20,8 @@
             * [Repository](development/general/data-patterns/repository.md)
             * [Reactive Extensions](development/general/data-patterns/reactive-extensions.md)
         * Testing
-            * [Intro to testing](development/testing/intro-to-testing.md)
-            * [Mocking](development/testing/mocking.md)
+            * [Intro to testing](development/general/testing/intro-to-testing.md)
+            * [Mocking](development/general/testing/mocking.md)
         * Source Control
             * [Source Control Basics](development/source-control/basic-source-control.md)
             * [Git Patterns](development/source-control/source-control-patterns.md)
