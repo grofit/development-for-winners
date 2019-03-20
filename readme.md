@@ -1,5 +1,7 @@
 # Hi There
 
+> It is recommended you read this book via the [gitbook viewer](https://grofit.gitbook.io/development-for-winners), however you can read it all on github directly if you want.
+
 ## A bit about what we will cover
 So before we begin, I just want to discuss the sort of content in this book as well as the reason why we are discussing these topics and why its not just a raw technical book focused on programming but a rounded book covering all aspects of development. 
 
