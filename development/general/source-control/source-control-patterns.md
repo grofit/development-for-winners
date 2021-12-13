@@ -1,39 +1,35 @@
-# Git Patterns
+# Source Control/Git Patterns
 
-Rather than just repeat what others far wiser than I have said, just go look at this link on the subject [**Git Flow**](http://nvie.com/posts/a-successful-git-branching-model/).
+To start with just working on `master`/`main` branch is fine, but as you do more complex work and potentially work with others you will need to come up with some sane branching strategies to make sure you dont end up losing work when you merge in other peoples changes as well as making sure you can partition your experimental changes from your stable ones.
 
-![Git Flow Diagram](http://nvie.com/img/git-model@2x.png)
+## Common Tips
 
-This is probably the best approach to large git projects to date, the main concept centers around a few key things which we can look at.
+Rather than go in depth here, we will dedicate a section to each sort of approach, as there are a few main ones and which is best depends on the scenario you are facing. This being said there is quite a lot of good practices you can employ regardless of the branching strategy you are using.
 
-### Master & Development
+### Always Work On A Branch
 
-So the main concept is that you have a branch for what is currently live (**master**), and a branch for what is in development ready to be released (**development**). These 2 branches are basically static and will always exist, however there will then be transient branches which are made off these branches for varying scenarios. 
+So by this we mean if you are going to change anything, don't do it on `main` make a branch from that with a relevant name, then do your changes in that branch. If you decide your changes are fine and should go into `main` then merge it in and delete it.
 
-### Hotfixes
+> It is generally good practice to have a prefix for your branches based on the purpose, for example if I were doing a hotfix maybe my branch should be `hf-login-issue` which indicates that its a hotfix for the login issue, whereas a feature request may be `fr-add-logout-button`. In corporate/open source settings you will probably have a bug/issue number too which you can add in like `hf-399-login-issue`, which can assist in tracability of an issue.
 
-So the first one would be creating **hotfix** branches off live which can be pushed directly back up to master, but also relayed into **development**, so both branches get the same fixes. 
+The main reason why we want to work on a branch is that you can isolate your new features from your hotfixes. 
 
-### Release
+#### Some Example Of Why Its Useful
 
-There are also **release** branches which basically would contain all the features required for a given release, and would be a branch off **development**. Once the release has been tested it can be fed into **master** and put live.
+So if you were to be working on a new feature for your project, but then someone runs over all panicky telling you there is a hotfix that needs looking at. You need to go do a fix on `main` branch, but you are mid way through a new feature which cant be released yet.
 
-One thing to mention here is that because of this separation off the **development** branch you can continue to develop new features and code against **development** without any worry as the **release** branch is isolated and only contains what was put into it at that time. In some cases you may want to do fixes on this branch and merge it back up to **development** as well as putting it into **master**.
+If you were working solely on `main` for everything then you either have to bin off all your new feature changes (or if you want to be clever `stash` them), or commit them and do your hotfix on top... neither of these options is good.
 
-### Feature Branches
+So if we were to rewind and assume we made a `fr-522-add-logout-button` branch for our new work, we could commit that up locally, switch over to the `main` branch, create a new branch from there called `hf-666-oh-noes-the-sky-is-falling` and do our fix on there. Once the fix has been verified it can be merged into master and you can hop back onto your *feature branch*.
 
-These are super important, as these are where you will spend most of your time in these branches working on new features. The main idea being that you branch off **development** and make a contextual branch for your body of work such as **adding-profile-page**. Once your work is done the idea is that you can choose when to merge it into development so you could wait until the end of a sprint and merge all features that are complete into **development** then make a release branch off there. Once these branches have been merged into development they can be removed if needed as development is up to date.
+### Make Sure To Reverse Merge Often
 
-It is also worth mentioning here as to why **feature branches** are a good idea, so imagine that you start your work day and are asked to add a new feature to the system, you are 5 hours into it when someone shouts that you need to go do a hotfix on live. Without feature branches where does this half made feature go? you could commit it into **development** but then its always going to be there, and if someone then decides later down the line that they dont need that feature, you would lose hours trying to undo all your commits for this feature from the **development** branch, so it makes far more sense to isolate this feature in its own branch so you can commit to it freely without worrying about effecting **development** or others.
+Assuming you are working on *feature branches* (as mentioned in the previous paragraph) you will often run into the situation where someone has made a change and merged it into your source branch (the branch which you took your branch from, often `main`) which means you cannot merge back into `main` without resolving conflicts.
 
-## Other approaches
+These conflicts happen because your source branch is more up to date than your *feature branch*, so one way to keep on top of this is whenever you do a commit locally, check if any changes have been made on your source branch, and if so merge your source branch into your feature branch.
 
-Some people prefer just working on one central branch that everyone commits into, often thought of as **mainline** and making release **tags** off there, this avoids large merges but means lots of more frequent smaller ones, it also makes it very difficult to swap and change what you are working on as you will always impact others when you start to code.
+> This is why its called `Reverse Merging` as rather than you merging INTO the source branch, you are reversing it and putting your source branch into your *feature branch*.
 
-Needless to say this is generally a bad practice and most people follow **git flow** or a simplified version, at the heart of almost all good git patterns there is the following:
+You will still possibly have merge conflicts with this, but this way they are lots of smaller ones that you can often get context on and discuss easier with team members. If you were to not do this and potentially wait until all your work is done then try to merge into your source branch, you could end up with **HUGE** merge conflicts.
 
-* **Ability to isolate and swap work quickly**
-* **Ability to track release versions**
-* **Ability to not effect others with half done work**
-
-So if you think git flow is a bit overkill then by all means simplify it by not having release branches, or by removing development and just working off feature branches on master. However you do it just make sure everyone knows what they are doing, and unless you are a lone wolf developer you will often hit a problem which could have been avoided using the default git flow model.
+> If this is over the span of weeks and there are tens of changes to merge in from various people, it could be really messy as people often forget their changes and move on with things, so the longer you leave it you may end up in a situation where you just end up starting again and manually redoing your changes.

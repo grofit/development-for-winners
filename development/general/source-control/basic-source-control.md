@@ -9,7 +9,7 @@ These days most people will recommend one of the following:
 * **mercurial**
 * **tfs**
 
-They are all great, but **git** and **mecurial** are slightly better because they are distributed version control systems which may not mean much to you, but it is far better as they have additional redundancy and a layer between your code and everyone else copy of the code held on the central repository.
+They are all great, but **git** and **mecurial** are better because they are distributed version control systems which may not mean much to you, but it is far better as they have additional redundancy and a layer between your code and everyone else copy of the code held on the central repository.
 
 Anyway we will focus on **git** and some of the reasons why you should be using some form of source control if you are not already doing so.
 
