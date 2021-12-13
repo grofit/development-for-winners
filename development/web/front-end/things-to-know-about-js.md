@@ -215,4 +215,22 @@ There is also the topic on `prototype` and instance methods vs prototype methods
 
 ## Closures
 
--- COMING SOON --
+Simply speaking closures are nested functions with state bleeding downard through all levels. So while they are super cool they can end up costing a bit of memory in some cases to keep state available further down the stack. 
+
+Here is a basic example:
+
+```js
+function SomeOuterScope(id)
+{
+    function SomeInnerScope(name)
+    { console.log(id + "_" + name); }
+
+    SomeInnerScope("Phil"); // invokes the method with id in scope
+}
+
+SomeOuterScope(1); // Prints out 1_Phil
+```
+
+This can be nested as much as you want and historically used to be used lots for callback style function handling, which has been replaced with `async` style handlers which we will touch more upon later.
+
+> Just be aware that doing this means that the scope for the parent level will hang around until all the child invocations have finished, so if you have long running tasks which have a lot of data in scope it could cause a lot of resource usage.
