@@ -10,6 +10,30 @@ It is included here as a lot of people get it wrong. You can go google it now an
 
 I dislike this approach and I have a better approach which is more isolated, more reuseable and also more flexible. As some of the problems with the former approach is that you tend to keep dumping all your logic into your repositories, so your `UserRepository` goes from having the basic CRUD methods to having lots of business logic which will keep snowballing every time you want to add more query types.
 
+### Whats Wrong With Existing Approaches?
+
+As all the logic for getting data from the underlying data source (be it a database, in memory list, xml file etc) is contained at the **repository** level, if you want to have a method in another repository access the logic you need to have one repository access another, i.e.
+
+```csharp
+public class SkillsRepository : IRepository
+{
+   public GroupRepository GroupRepository {get;} // set via constructor? assuming no interface, should probably have one too
+
+   public IEnumerable<Skills> GetAllSkillsFromGroup() { ... } // Call group repo to get users in group then extract all their skills
+}
+```
+
+So this in best case causes interdependencies between repositories, and at worst case can cause circular dependencies which are going to cause you a big headace. You may be luck and you never need to share logic between repositories, or you may just copy the query logic over which isnt very **DRY** of you, but it will at least get the job done.
+
+So the problems with the original design that is often touted is:
+
+- Implementation per model type
+- Lots of implementations to maintain
+- Potentially become dumping grounds with each new permutation of logic needed
+- Can lead to circular dependencies or lots of duplicated logic
+
+> So with this in mind lets look at the new approach which offers another perspective on the same problem.
+
 ## Making the repository
 
 Let's start off with making a repository interface which almost all examples will agree upon.

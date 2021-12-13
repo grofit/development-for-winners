@@ -123,4 +123,4 @@ It may seem like more of a faff up front but in the long run it can pay dividend
 
 ## Service Location
 
-There is no point mentioning it too much here as its already mentioned in the **service location** topc, however its worth noting here that its bad, and you should probably use **DI** instead wherever possible.
+There is no point mentioning it too much here as its already mentioned in the **service location** topc, however its worth noting here that its bad, and you should probably use **Constructor Injection** via **DI** instead wherever possible.

@@ -33,3 +33,13 @@ These conflicts happen because your source branch is more up to date than your *
 You will still possibly have merge conflicts with this, but this way they are lots of smaller ones that you can often get context on and discuss easier with team members. If you were to not do this and potentially wait until all your work is done then try to merge into your source branch, you could end up with **HUGE** merge conflicts.
 
 > If this is over the span of weeks and there are tens of changes to merge in from various people, it could be really messy as people often forget their changes and move on with things, so the longer you leave it you may end up in a situation where you just end up starting again and manually redoing your changes.
+
+### Not Every Branch Needs To Live On Origin
+
+So in the non distributed version control world all changes live on the central server, however in this world we have our own copy of the repository and all changes locally.
+
+This means that we can easily make as many branches as we want locally and they will **ONLY** exist in our **LOCAL** repository on our machine, not on the central/origin server.
+
+When we decide our branch (probably a `feature branch`) needs to be shared with others we can `push` it up so everyone can see it.
+
+> This is a **HUGE** boon for DVCS as we can branch locally as much as we want to mess about and only push up or merge it when we are ready without everyone else knowing it even exists, which gives greater flexibility to work however you need to without worrying about effecting others. 
