@@ -7,7 +7,7 @@
         * [Agile Buzzwords](planning/agile/agile-buzzwords.md)
     * Collaboration and Requirements
         * [Ideas & Tasks](planning/requirements/ideas-and-tasks.md) 
-        * [Quantifying Requirements](planning/requirements/writing-requirements.md) 
+        * [Quantifying Requirements](planning/requirements/writing-requirements.md)
 * [Development](development/readme.md)
     * [Good Stuff](development/general/readme.md)
         * Design Patterns
@@ -16,6 +16,7 @@
             * [Inversion of control](development/general/dependency-patterns/inversion-of-control.md)
             * [Service location](development/general/dependency-patterns/service-location.md)
             * [Dependency injection](development/general/dependency-patterns/dependency-injection.md)
+            * [Aspect Oriented Programming](development/general/dependency-patterns/aspect-oriented-programming.md)
             * [Strategy-like Patterns](development/general/data-patterns/strategy-like-patterns.md)
             * [Repository](development/general/data-patterns/repository.md)
             * [Reactive Extensions](development/general/data-patterns/reactive-extensions.md)
@@ -42,3 +43,5 @@
 * [Building & Deployment](building/readme.md)
     * Build scripts & servers
         * [Build Scripts](building/build-scripts.md) 
+* Other
+    * [Working In The Industry](development/other/working-in-the-industry.md)
