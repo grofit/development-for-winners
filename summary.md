@@ -11,6 +11,7 @@
 * [Development](development/readme.md)
     * [Good Stuff](development/general/readme.md)
         * Design Patterns
+            * [Interfaces](development/general/other/interfaces.md)
             * [Factory](development/general/creational-patterns/factory.md)
             * [Builder](development/general/creational-patterns/builder.md)
             * [Inversion of control](development/general/dependency-patterns/inversion-of-control.md)
@@ -29,7 +30,8 @@
             * [Git Patterns](development/source-control/source-control-patterns.md)
             * [Git Flow](development/source-control/git-flow.md)
             * [Github Flow](development/source-control/github-flow.md)
-        * [Anti Patterns](development/general/anti-patterns/anti-patterns.md)
+        * [Anti Patterns](development/general/other/anti-patterns.md)
+        * [Inheritance vs Composition](development/general/other/inheritance-vs-composition.md)
     * [Web Specific Stuff](development/web/readme.md)
         * Front End
             * [Quick word on JS](development/web/front-end/quick-word-on-js.md)
@@ -44,4 +46,4 @@
     * Build scripts & servers
         * [Build Scripts](building/build-scripts.md) 
 * Other
-    * [Working In The Industry](development/other/working-in-the-industry.md)
+    * [Working In The Industry](development/general/other/working-in-the-industry.md)
