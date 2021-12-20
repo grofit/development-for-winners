@@ -67,3 +67,31 @@ public interface INpcEntity : IGameEntity, IIsAIControlled {}
 This kinda touches on the 2nd point of conventions, but as you can see you can have really granular interfaces which express each **aspect** of what behaviour an object has, but can be exposed via composition for higher level interfaces.
 
 > It is worth mentioning here though that if you were going down this road and end up with LOADS of these sort of granular interfaces you may be better off looking at an ECS style pattern which lets you do this in a far more dynamic way.
+
+### Interface Specificity
+
+One final thing worth mentioning which can be useful for interfaces is that you can often wrap up a faffy long winded interface in a higher level more specific one which may make things more usable for your needs.
+
+For example lets say we have a lovely repository like:
+
+```csharp
+public interface IRepository<T,K>
+{
+    // ...    
+}
+```
+
+To consume that we would need to put lots of `IRepository<MyModel, int>` and `IRepository<SomeOtherModel, string>` etc, which is fine but may be unsightly, or there may even be scenarios where you need to use the same generic twice for some reason like `IRepository<string, int>` which can be problematic as if there are more than one implementation, which one do you need?
+
+So to solve this we can add another interface layer on top for end consumption like this:
+
+```csharp
+public interface IMyModelRepository : IRepository<MyModel, int> {...}
+public interface ISomeOtherModelRepository : IRepository<SomeOtherModel, string> {...}
+public interface ILocaleRepository : IRepository<string, int> {...}
+public interface IKeywordRepository : IRepository<string, int> {...}
+```
+
+As you can see we can still use them as if they are the underlying `IRepository<T,K>` type but we have a nicer more specific high level interface wrapping it up, which should then be used as the implementation contract.
+
+> This also can make your **DI** configuration seem a bit more sane such as `container.Bind<ILocaleRepository>().To<LocaleRepository>()`, however even if there is only 1 **REAL** implementation under the hood you still need 1 facade wrapper class per interface type here, which is a downside to this approach.
