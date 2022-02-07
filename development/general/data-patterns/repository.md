@@ -25,14 +25,15 @@ public class SkillsRepository : IRepository
 
 So this in best case causes interdependencies between repositories, and at worst case can cause circular dependencies which are going to cause you a big headace. You may be luck and you never need to share logic between repositories, or you may just copy the query logic over which isnt very **DRY** of you, but it will at least get the job done.
 
-So the problems with the original design that is often touted is:
+So the problems with the original touted design is:
 
 - Implementation per model type
 - Lots of implementations to maintain
+- Varying amount of logic contained within (i.e each bespoke `Get*` method)
 - Potentially become dumping grounds with each new permutation of logic needed
 - Can lead to circular dependencies or lots of duplicated logic
 
-> So with this in mind lets look at the new approach which offers another perspective on the same problem.
+> So with this in mind lets look at a slightly modified approach which offers another perspective on the same problem and removes most of the negatives.
 
 ## Making the repository
 
@@ -41,8 +42,8 @@ Let's start off with making a repository interface which almost all examples wil
 ```csharp
 public interface IRepository<TItem, TKey>
 {
-    TItem Get(TKey key);
-    void Save(TItem item);
+    TItem Retrieve(TKey key);
+    void Create(TItem item);
     void Update(TItem item);
     void Delete(TItem item);
 }
@@ -50,22 +51,20 @@ public interface IRepository<TItem, TKey>
 
 So before we go any further lets just go over the basics. The interface has 2 generic types, the first being the data object that is to be retrieved and stored, like your `Item`, `Player`, `Quest` etc, the second being the type of the key/identifier for this resource. 
 
-> The key is sometimes omitted if you are not working purely with relational databases, so within here we will simplify and remove the key type generic as in the game world you may be working more with in memory of flat file style databases.
+> The key is sometimes omitted if you are not working purely with relational databases, so within here we will simplify and remove the key type generic but keep in mind you may need it.
 
 So now we have shown the *vanilla* repository we will start to differentiate from the majority of other patterns and we add the notion of an Execute method and replace Get with Find method. We will also remove the key type as Find allows us more flexibility here.
-
-> There is also the notion of a `HybridQuery` but I will leave that out and explain it later on so you can decide if you want to add it or not.
 
 ```csharp
 public interface IRepository<TItem>
 {
-    void Save(TItem item);
+    void Create(TItem item);
+    void Retrieve(Guid id);
     void Update(TItem item);
     void Delete(TItem item);
     
     IEnumerable<TItem> Find(IFindQuery<TItem> query);
-    
-    void Execute(IExecuteQuery<TItem> query);
+    T Query<T>(IQuery<T> query);
 }
 ```
 
@@ -76,115 +75,58 @@ So as you can see here we now have a way to get a collection of `TItem` instance
 The interfaces for the queries would look like:
 
 ```csharp
-public interface IFindQuery<T>
+// Represents the most basic type of query
+public interface IQuery<T>
 {
-    IEnumerable<T> Find(IDataSource dataSource);
+    T Query(IDbConnection connection);
 }
 
-public interface IExecuteQuery<T>
+// Represents a query that returns a collection of data
+public interface IFindQuery<T> : IQuery<IEnumerable<T>>
 {
-    void Execute(IDataSource dataSource);
-}
-```
-
-This may seem a little confusing as we have not discussed the `IDataSource`, this is an abstracted notion of how you access the data. If you are using databases you could easily replace this with `IDBConnection` which would abstract away the database. Given in most cases game data is read into memory you would probably just have this as a wrapper around the list of data in memory, however you could make it abstract the file system if you wished it to do manual file reads/writes.
-
-## Abstracting the data store/source
-
-In this example we will assume you have your game data in some files, be it XML/JSON/Binary and you read it into a big list which will be in memory for the duration of the game, so the `IDataSource` will wrap this.
-
-It would look something like:
-
-```csharp
-public interface IDataSource<T>
-{
-    IList<T> DataItems {get;}
-    
-    public void SaveChanges();
+    IEnumerable<T> Query(IDbConnection connection);
 }
 ```
 
-Then our actual implementation for our in-memory list of objects:
+As we are using a database as our example data store here (for simplicity), you may have a different kind of data store in your scenario such as a 3rd party API for storing data or a local file etc.
 
-```csharp
-public class InMemoryDataSource<T> : IDataSource<T>
-{
-        private readonly IList<T> _entries;
- 
-        public InMemoryDatabase()
-        { _entries = new List<T>(); }
-
-        public InMemoryDatabase(IList<T> entries)
-        { _entries = entries; }
-
-        public IList<T> DataItems 
-        {
-            get { return _entries; }
-        }
-        
-        public void SaveChanges()
-        {
-            // do something like serialize back out
-        }
-}
-```
-
-> If you wanted to here you could expose methods for querying the data to make it more like a database, but we will try to keep it all simple for now so you are able to just see the high level picture, then customize the underlying classes and interfaces to suit your scenario.
+> There is a brief blurb near the end of this chapter on creating your own abstractions over your data source if its not a database.
 
 ## Implementing the repository
 
-So currently we have got our `IRepository`, the query classes, the `IDataSource` interfaces and implementations, so now lets look at making a repository instance and then using it with some queries.
+So currently we have got our `IRepository`, the query classes, and we understand the notion of a data source (`IDbConnection` in this example). So lets put it all together and see how it should be implemented.
+
+> We are assuming some ORM such as Dapper or EF etc are added here to provide the CRUD extension on the `IDbConnection`
 
 ```csharp
-public class InMemoryRepository<T> : IRepository<T>
+public class DatabaseRepository<T> : IRepository<T>
 {
-	private IDataSource<T> _dataSource;
+	private IDbConnection _connection_;
 	
-	public DatabaseRepository(IDataSource<T> dataSource)
-	{ _dataSource = dataSource; }
+	public DatabaseRepository(IDbConnection connection)
+	{ _connection_ = connection; }
 
-    public void Save(TItem item)
-    { 
-        _dataSource.DataItems.Add(item);
-        _dataSource.SaveChanges();
-    }
-    
-    public void Update(TItem item)
-    {
-        // Method only saves
-        _dataSource.SaveChanges();
-    }
-    
-    public void Delete(TItem item)
-    { 
-        _dataSource.DataItems.Remove(item); 
-        _dataSource.SaveChanges();
-    }
+    public void Create(T item) => _connection_.Create<T>(item);
+    public void Retrieve(Guid id) => _connection.Get<T>(id);
+    public void Update(T item) => _connection.Update<T>(item);    
+    public void Delete(T item) => _connection.Delete<T>(item);
 	
-	public IEnumerable<T> Find(IFindQuery<T> query)
-	{ return query.Query(_dataSource); }
-
-	public void Execute(IExecuteQuery<T> query)
-	{ 
-	    query.Query(_dataSource); 
-	    _dataSource.SaveChanges();
-	}
+	public IEnumerable<T> Find(IFindQuery<T> query) => query.Query(_dataSource);
+	public TQuery Query(IQuery<TQuery> query) => query.Query(_dataSource);
 }
 ```
 
-Now rather than having a repository for each type, we have a repository based around the interaction with the data source. So as shown above we don't need to `Update` the item instance as all items will be reference types (in this scenario), so you changing an item would automatically update the in-memory version. 
+Now rather than having a repository for each type, we have a single repository based around the interaction with the data source. 
 
-> One of the things you may have noticed in the above example is that we are saving our changes after every interaction. This is fine for now, however further down the line you may want to only save after a set of changes have occurred, like a database transaction. In this scenario you could easily make a new implementation of `IRepository` which doesn't save automatically, and then you can have the transaction handler manage the saving. This is also known as a **Unit Of Work** pattern, which we will look into later. As if you were to be using a `FileSystemRepository` where the `IDataSource` is a file system handle, you would need to manually update the file system, or an actual database every time a change occurred, which is going to be costly for performance.
+> In some scenarios such as using in memory data sources or external file system you may need to manually save the changes after each step or knowingly persist the changes at a later point. For databases there is also the `Unit Of Work` pattern which lets you wrap up a few things together and rollback if it fails.
 
 #### Example usage
 
 Anyway so lets do a quick use case for the above code we wrote:
 
 ```csharp
-var aLotOfUsersFromAFile = // imagine this is populated;
-var userDataSource = new InMemoryDataSource<User>(aLotOfUsersFromAFile);
-
-var userRepository = new InMemoryRepository<User>(userDataSource);
+var ourDbConnection = // imagine this is connected;
+var userRepository = new DatabaseRepository<User>(ourDbConnection);
 
 var getActiveUsersQuery = new GetActiveUsersQuery();
 var activeUsers = userRepository.Find(getActiveUsersQuery);
@@ -197,9 +139,10 @@ Now the above example is just whimsical but if you imagine there is a user model
 ```csharp
 public class GetActiveUsersQuery : IFindQuery<User>
 {
-    public IEnumerable<User> Query(IDataSource<User> dataSource) 
+    public IEnumerable<User> Query(IDbConnection connection) 
     {
-        return dataSource.DataItems.Where(x => x.IsActive);
+        // Again we assume some ORM provides us the Query<T> extension here
+        return connection.Query<User>(x => x.IsActive);
     }
 }
 ```
@@ -222,57 +165,81 @@ public class PredicateFindQuery<T> : IFindQuery<T>
     
     public IEnumerable<T> Query(IDataSource<T> dataSource) 
     {
-        return dataSource.DataItems.Where(_predicate);
+        return dataSource.Query<T>(_predicate);
     }
 }
 ```
 
-This allows you to just write any old predicate you want to query into the data source. I would probably still advocate making typed queries to represent your logic so it shows intent. However if you just want to get on and do some testing of queries or just don't want to have to keep instantiating query objects just make it a public property and off you go.
+This allows you to just write any old predicate you want to query into the data source. I would probably still advocate making specific queries to represent your logic so it shows intent. 
 
-## Implementing execute queries
+However if you just want to get on and do some testing of queries or just don't want to have to keep instantiating query objects just make it a public property and off you go.
 
-Now we have not discussed the `ExecuteQuery` type yet. So where the `FindQuery` is there to get a readonly collection of matching results, `ExecuteQuery` is there to alter data in some way, so this provides the write concern to the find's read concern. so lets go over that with a quick example.
+## Implementing more specific IQuerys
+
+Now we have not discussed the `IQuery` type yet. So where the `FindQuery` is mainly there to get a readonly collection of matching results for a repository. `IQuery` is there to provide an all purpose query mechanism to get or alter data in some way, so this provides us a way to write data, so lets go over that with a quick example.
 
 ```csharp
-public class BanAllCheatersQuery : IExecuteQuery<User>
+public class BanAllCheatersQuery : IQuery<int>
 {
-    public void Query(IDataSource<User> dataSource)
+    public int Query(IDbConnection connection)
     {
-        var allCheatingUsers = dataSource.DataItems.Where(x => x.HasCheated && x.IsActive);
-        
-        foreach(var cheater in allCheatingUsers)
-        {
-            cheater.IsActive = false;
-        }
+        var sqlQuery = "UPDATE users SET IsActive = false WHERE HasCheated = true"; 
+        var numberOfCheatingUsers = dataSource.Query(sqlQuery);
+        return numberOfCheatingUsers;
     }
 }
 ```
 
-So it would retrieve all active cheats, then disable them. This approach can be done for updating sets of data without having to do it for each individual set.
+So it would update all the cheating users to be inactive and return back how many rows have been effected to the consumer.
+
+> One thing to note here also about the `IQuery` pattern is that it allows you to use whatever approach/logic you want to interact with your data source, so you can do as much or as little as you want within these things, and its all decoupled, encapsulated and reusable across any repository
 
 ## More information
 
-This has been a large block on the pattern and although the above use case would work fine for most game development scenarios in the web/app world you would probably end up dealing with databases more be it relational or document/graph etc, so in those cases you may need to change around how you abstract away certain parts.
+This has been a large block on the pattern and although the above use case focuses on databases you may need to alter the pattern slightly to fit your own scenarios, as even databases are not all relational these days, but the key thing is that we wrap up any data specific communication/logic into queries and have 1 implementation of what the repository should do.
 
-It is entirely possible to make it so abstracted and generic that you could cope with almost any scenario and underlying connections etc, however in most cases its a pointless endevour and you should really only cater to what you would expect to use, and in the context of game development the above should serve you well enough.
+> It is worth noting this is a brief blurb on the downsides to the default Generic Repository Pattern often shared online, there are a few other things that you can do to make things even more succinct but they can be for another chapter.
 
-Now we didn't cover Hybrid queries and they are not really **needed** as such but the notion is that you provide a way to do a query which returns a defined type, so if you wanted to just select a small part of a data model, or get all names of active users without their entire user model, or something like:
+## A brief detour on data source abstraction
+
+In the real world the data source could be anything from a database to a 3rd party API, even a XML/JSON file. So while almost all example of `IRepository` online are for database interactions we can use them to express any data abstraction.
+
+In this example we will assume you have your game data in some files, be it XML/JSON/Binary and you read it into a big list which will be in memory for the duration of the game, so the `IDataSource` will wrap this.
+
+It would look something like:
 
 ```csharp
-public interface IHybridQuery<TInput, TOutput>
+public interface IDataSource<T>
 {
-    TOutput Query(IDataSource<TInput> dataSource);
-}
-
-public class GetUserMetaDataQuery : IHybridQuery<User, IDictionary<string, string>>
-{
-    public IDictionary<string, string> Query(IDataSource<User> dataSource)
-    {
-        return dataSource.DataItems.Select(x => x.Metadata);
-    }
+    IList<T> DataItems {get;}
+    
+    public void SaveChanges();
 }
 ```
 
-This would need a new method on the repository, but this allows you to have more flexibility in how you get your data back if you find you need to reduce the data chatter between components.
+Then our actual implementation for our in-memory list of objects:
 
-You can also look at adding the `Get(TKey key)` method back in if you have some notion of a keyed value, this can make it easier to get individual models with an Id. In most cases this requires your models to have an interface describing the key though so I know in game development a lot of people do not bother unless it is going to a database.
+```csharp
+public class InMemoryDataSource<T> : IDataSource<T>
+{
+        private readonly IList<T> _entries;
+ 
+        public InMemoryDataSource()
+        { _entries = new List<T>(); }
+
+        public InMemoryDataSource(IList<T> entries)
+        { _entries = entries; }
+
+        public IList<T> DataItems => _entries;
+        }
+        
+        public void SaveChanges()
+        {
+            // do something like serialize back out
+        }
+}
+```
+
+> If you wanted to here you could expose methods for querying the data to make it more like a database, but we will try to keep it all simple for now so you are able to just see the high level picture, then customize the underlying classes and interfaces to suit your scenario.
+
+So as you can see you can wrap your data source however you want, as long as you provide a way for the repository to access it you are golden
