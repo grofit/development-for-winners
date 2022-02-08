@@ -169,7 +169,7 @@ mockRepo
 
 // New way (again assuming Moq)
 mockRepo
-    .Setup(x => x.Query(It.IsAny<CreateEntityQuer<Foo>>()))
+    .Setup(x => x.Query(It.IsAny<CreateEntityQuery<Foo>>()))
     .Returns(/*whatever*/);
 ```
 

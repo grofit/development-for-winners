@@ -36,7 +36,7 @@ so lets write a simple test for the expected result.
 
 ```csharp
 using NUnit;
-using NSubstitute; 	// NSubstitute is our mocking framework (many others exist)
+using NSubstitute; 	// Using NSubstitute here, but you can use Moq, whatever
 
 [TestFixture]
 public class UserAuthenticatorUnitTests
