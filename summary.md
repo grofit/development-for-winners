@@ -20,6 +20,7 @@
             * [Aspect Oriented Programming](development/general/dependency-patterns/aspect-oriented-programming.md)
             * [Strategy-like Patterns](development/general/data-patterns/strategy-like-patterns.md)
             * [Repository](development/general/data-patterns/repository.md)
+            * [Repositories Again?!](development/general/data-patterns/repositories-again.md)
             * [Reactive Extensions](development/general/data-patterns/reactive-extensions.md)
         * Testing
             * [Intro to testing](development/general/testing/intro-to-testing.md)

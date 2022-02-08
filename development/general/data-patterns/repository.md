@@ -29,7 +29,6 @@ So the problems with the original touted design is:
 
 - Implementation per model type
 - Lots of implementations to maintain
-- Varying amount of logic contained within (i.e each bespoke `Get*` method)
 - Potentially become dumping grounds with each new permutation of logic needed
 - Can lead to circular dependencies or lots of duplicated logic
 
@@ -101,18 +100,18 @@ So currently we have got our `IRepository`, the query classes, and we understand
 ```csharp
 public class DatabaseRepository<T> : IRepository<T>
 {
-	private IDbConnection _connection_;
-	
-	public DatabaseRepository(IDbConnection connection)
-	{ _connection_ = connection; }
+    private IDbConnection _connection_;
+
+    public DatabaseRepository(IDbConnection connection)
+    { _connection_ = connection; }
 
     public void Create(T item) => _connection_.Create<T>(item);
     public void Retrieve(Guid id) => _connection.Get<T>(id);
     public void Update(T item) => _connection.Update<T>(item);    
     public void Delete(T item) => _connection.Delete<T>(item);
-	
-	public IEnumerable<T> Find(IFindQuery<T> query) => query.Query(_dataSource);
-	public TQuery Query(IQuery<TQuery> query) => query.Query(_dataSource);
+
+    public IEnumerable<T> Find(IFindQuery<T> query) => query.Query(_dataSource);
+    public TQuery Query(IQuery<TQuery> query) => query.Query(_dataSource);
 }
 ```
 
@@ -222,21 +221,21 @@ Then our actual implementation for our in-memory list of objects:
 ```csharp
 public class InMemoryDataSource<T> : IDataSource<T>
 {
-        private readonly IList<T> _entries;
- 
-        public InMemoryDataSource()
-        { _entries = new List<T>(); }
+    private readonly IList<T> _entries;
 
-        public InMemoryDataSource(IList<T> entries)
-        { _entries = entries; }
+    public InMemoryDataSource()
+    { _entries = new List<T>(); }
 
-        public IList<T> DataItems => _entries;
-        }
-        
-        public void SaveChanges()
-        {
-            // do something like serialize back out
-        }
+    public InMemoryDataSource(IList<T> entries)
+    { _entries = entries; }
+
+    public IList<T> DataItems => _entries;
+    }
+    
+    public void SaveChanges()
+    {
+        // do something like serialize back out
+    }
 }
 ```
 
