@@ -15,6 +15,7 @@
             * [Factory](development/general/creational-patterns/factory.md)
             * [Builder](development/general/creational-patterns/builder.md)
             * [Inversion of control](development/general/dependency-patterns/inversion-of-control.md)
+            * [Enumerables & Collections](development/general/data-patterns/enumerables.md)
             * [Service location](development/general/dependency-patterns/service-location.md)
             * [Dependency injection](development/general/dependency-patterns/dependency-injection.md)
             * [Aspect Oriented Programming](development/general/dependency-patterns/aspect-oriented-programming.md)
