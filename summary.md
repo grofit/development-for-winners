@@ -22,10 +22,12 @@
             * [Strategy-like Patterns](development/general/data-patterns/strategy-like-patterns.md)
             * [Repository](development/general/data-patterns/repository.md)
             * [Repositories Again?!](development/general/data-patterns/repositories-again.md)
+            * [Service Composition](development/general/data-patterns/service-composition.md)
             * [Reactive Extensions](development/general/data-patterns/reactive-extensions.md)
         * Testing
             * [Intro to testing](development/general/testing/intro-to-testing.md)
             * [Mocking](development/general/testing/mocking.md)
+            * [API Testing](development/general/testing/api-testing.md)
         * Source Control
             * [Source Control Basics](development/general/source-control/basic-source-control.md)
             * [DVCS Basics](development/general/source-control/dvcs-basics.md)
